@@ -350,9 +350,10 @@ img{max-width:100%}
       <div class="field"><label for="lLang">Уровень языка</label><select id="lLang"><option>Нет сертификата</option><option>HSK 3</option><option>HSK 4</option><option>HSK 5+</option><option>IELTS 6.0+</option></select></div>
     </div>
     <div class="field"><label for="lMsg">Комментарий</label><textarea id="lMsg" rows="3" placeholder="Например: хочу в Шанхай на экономику, средний балл 4.6"></textarea></div>
+    <input type="text" id="lHoney" name="_honey" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px">
     <div class="err" id="lErr" hidden></div>
     <div class="ok" id="lOk" hidden></div>
-    <button class="btn btn-seal" type="submit">Отправить заявку</button>
+    <button class="btn btn-seal" type="submit" id="lSend">Отправить заявку</button>
   </form>
 </div></section>
 
@@ -532,15 +533,29 @@ function renderDocs(){
 $("#checklist").addEventListener("change",e=>{const k=e.target.dataset.k;if(!k)return;checked[k]=e.target.checked;store.set("cs_docs",checked);renderDocs()});
 $("#docTabs").addEventListener("click",e=>{const b=e.target.closest("[data-doc]");if(!b)return;S.doc=b.dataset.doc;document.querySelectorAll("#docTabs .chip").forEach(c=>c.setAttribute("aria-pressed",c===b));renderDocs()});
 
-/* lead form */
-$("#leadForm").addEventListener("submit",e=>{
+/* lead form: заявки уходят на почту через FormSubmit */
+const LEAD_URL="https://formsubmit.co/ajax/armanshabal@gmail.com";
+$("#leadForm").addEventListener("submit",async e=>{
   e.preventDefault();
   const name=$("#lName").value.trim(),contact=$("#lContact").value.trim();
-  $("#lOk").hidden=true;
-  if(!name||!contact){$("#lErr").textContent="Укажите имя и телефон или Telegram, чтобы консультант мог с вами связаться.";$("#lErr").hidden=false;return}
-  $("#lErr").hidden=true;
-  $("#lOk").textContent=`${name}, спасибо! Приём заявок через сайт скоро заработает. Пока форма в тестовом режиме и заявка никуда не отправилась.`;
-  $("#lOk").hidden=false;
+  const err=$("#lErr"),ok=$("#lOk"),btn=$("#lSend");
+  ok.hidden=true;
+  if(!name||!contact){err.textContent="Укажите имя и телефон или Telegram, чтобы консультант мог с вами связаться.";err.hidden=false;return}
+  err.hidden=true;
+  if($("#lHoney").value)return;
+  btn.disabled=true;btn.textContent="Отправляем…";
+  try{
+    const r=await fetch(LEAD_URL,{method:"POST",headers:{"Content-Type":"application/json","Accept":"application/json"},body:JSON.stringify({
+      _subject:"Новая заявка с сайта: "+name,_template:"table",
+      "Имя":name,"Контакт":contact,"Программа":$("#lLevel").value,"Уровень языка":$("#lLang").value,"Комментарий":$("#lMsg").value.trim()||"—"
+    })});
+    const d=await r.json().catch(()=>({}));
+    if(!r.ok||String(d.success)!=="true")throw new Error(d.message||"send failed");
+    ok.textContent=`${name}, заявка отправлена. Консультант свяжется с вами в течение дня.`;ok.hidden=false;
+    $("#leadForm").reset();
+  }catch(x){
+    err.textContent="Не получилось отправить заявку. Проверьте интернет и попробуйте ещё раз.";err.hidden=false;
+  }finally{btn.disabled=false;btn.textContent="Отправить заявку"}
 });
 
 syncBudget();renderUnis();renderProv();renderDocs();
