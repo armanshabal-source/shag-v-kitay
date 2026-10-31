@@ -1,0 +1,539 @@
+<title>Шаг в Китай</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700&family=Golos+Text:wght@400;500;600&family=JetBrains+Mono:wght@400;600&family=Noto+Serif+SC:wght@600;900&display=swap">
+<style>
+/* Layout: left-aligned editorial column; seal-stamp hero + finder, then catalog grid, grants table, province cost bars, document checklist beside the timeline, tariffs. */
+:root{
+  --paper:#F5F8F6; --surface:#FFFFFF; --ink:#10201C; --muted:#56685F; --line:#D5DFDA;
+  --jade:#0E6A5A; --jade-soft:#E1EEE9; --seal:#BE3A22; --seal-soft:#F7E4DF; --on-accent:#FFFFFF;
+  --f-display:"Unbounded","Arial Black",system-ui,sans-serif;
+  --f-body:"Golos Text","Segoe UI",system-ui,sans-serif;
+  --f-mono:"JetBrains Mono",ui-monospace,Consolas,monospace;
+  --f-han:"Noto Serif SC","Songti SC","SimSun",serif;
+  --r:10px;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --paper:#0C1613; --surface:#12201C; --ink:#E4EDE9; --muted:#93A69E; --line:#24352F;
+  --jade:#52C2A6; --jade-soft:#16302A; --seal:#E36A4F; --seal-soft:#3A1E18; --on-accent:#0C1613; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --paper:#0C1613; --surface:#12201C; --ink:#E4EDE9; --muted:#93A69E; --line:#24352F;
+  --jade:#52C2A6; --jade-soft:#16302A; --seal:#E36A4F; --seal-soft:#3A1E18; --on-accent:#0C1613; color-scheme:dark}
+
+*{box-sizing:border-box}
+body{background:var(--paper);color:var(--ink);font-family:var(--f-body);font-size:16px;line-height:1.55}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--paper)}
+.wrap{max-width:1180px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+h1,h2,h3{font-family:var(--f-display);text-wrap:balance;margin:0;line-height:1.15;font-weight:700}
+h2{font-size:clamp(1.6rem,3.4vw,2.4rem)}
+h3{font-size:1.05rem;font-weight:500}
+p{margin:0}
+a{color:var(--jade)}
+button,input,select,textarea{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--jade);outline-offset:2px}
+.mono{font-family:var(--f-mono);font-variant-numeric:tabular-nums}
+.eyebrow{font-family:var(--f-mono);font-size:.75rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.han{font-family:var(--f-han)}
+
+/* top bar */
+.demo-note{background:var(--jade-soft);color:var(--ink);font-size:.82rem}
+.demo-note .wrap{padding-block:6px;display:flex;gap:12px;flex-wrap:wrap;justify-content:space-between;align-items:center}
+header.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:color-mix(in srgb,var(--paper) 92%,transparent);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+header.top .wrap{display:flex;align-items:center;gap:20px;padding-block:12px;flex-wrap:wrap}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--ink);font-family:var(--f-display);font-weight:700;font-size:1.05rem}
+.seal-mini{width:30px;height:30px;border-radius:6px;background:var(--seal);color:#fff;display:grid;place-items:center;font-family:var(--f-han);font-weight:900;font-size:.95rem}
+nav.links{display:flex;gap:18px;flex-wrap:wrap;margin-left:auto}
+nav.links a{color:var(--ink);text-decoration:none;font-size:.92rem}
+nav.links a:hover{color:var(--jade)}
+.pro-switch{display:flex;align-items:center;gap:8px;font-size:.85rem;cursor:pointer;user-select:none}
+.pro-switch input{appearance:none;width:38px;height:22px;border-radius:11px;background:var(--line);position:relative;cursor:pointer;transition:background .2s}
+.pro-switch input::after{content:"";position:absolute;top:3px;left:3px;width:16px;height:16px;border-radius:50%;background:var(--surface);transition:transform .2s}
+.pro-switch input:checked{background:var(--seal)}
+.pro-switch input:checked::after{transform:translateX(16px)}
+
+/* hero */
+.hero .wrap{display:grid;grid-template-columns:1.15fr .85fr;gap:48px;padding-block:56px 64px;align-items:start}
+.hero h1{font-size:clamp(2rem,5vw,3.6rem);letter-spacing:-.01em}
+.hero h1 em{font-style:normal;color:var(--seal)}
+.hero-copy{display:grid;gap:22px;min-width:0}
+.hero-lede{font-size:1.12rem;color:var(--muted);max-width:56ch}
+.stamp{display:inline-grid;grid-template-columns:repeat(2,1fr);width:116px;height:116px;border:4px solid var(--seal);border-radius:8px;color:var(--seal);transform:rotate(-4deg);font-family:var(--f-han);font-weight:900;font-size:2.3rem;line-height:1;place-items:center;padding:6px}
+.facts{display:flex;gap:28px;flex-wrap:wrap}
+.facts div{display:grid}
+.facts b{font-family:var(--f-mono);font-size:1.5rem;font-weight:600}
+.facts span{font-size:.82rem;color:var(--muted)}
+
+.finder{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:24px;display:grid;gap:16px;min-width:0}
+.finder h3{font-size:1.1rem}
+.field{display:grid;gap:6px}
+.field label{font-size:.8rem;color:var(--muted)}
+.field select,.field input[type=text],.field input[type=search],.field textarea{width:100%;padding:10px 12px;border:1px solid var(--line);border-radius:8px;background:var(--paper)}
+.range-row{display:flex;justify-content:space-between;font-size:.85rem}
+input[type=range]{width:100%;accent-color:var(--jade)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border:0;border-radius:8px;padding:12px 18px;font-weight:600;cursor:pointer;text-decoration:none}
+.btn-primary{background:var(--jade);color:var(--on-accent)}
+.btn-seal{background:var(--seal);color:#fff}
+.btn-ghost{background:transparent;border:1px solid var(--line);color:var(--ink)}
+.btn:hover{filter:brightness(1.07)}
+
+section.block{padding-block:64px;border-top:1px solid var(--line)}
+.block-head{display:flex;justify-content:space-between;align-items:end;gap:24px;flex-wrap:wrap;margin-bottom:28px}
+.block-head p{color:var(--muted);max-width:60ch}
+
+/* catalog */
+.cat-tools{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:20px;align-items:center}
+.cat-tools .field{min-width:160px;flex:1}
+.chips{display:flex;gap:8px;flex-wrap:wrap}
+.chip{border:1px solid var(--line);background:var(--surface);border-radius:999px;padding:6px 12px;font-size:.85rem;cursor:pointer}
+.chip[aria-pressed="true"]{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.count{font-size:.9rem;color:var(--muted);margin-bottom:14px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:16px}
+.uni{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:20px;display:grid;gap:14px;grid-template-rows:auto auto 1fr auto;min-width:0}
+.uni-top{display:flex;justify-content:space-between;gap:12px;align-items:start}
+.uni-top h3{font-size:1rem}
+.uni .zh{font-family:var(--f-han);font-weight:600;font-size:1.25rem;color:var(--seal);white-space:nowrap}
+.loc{font-size:.85rem;color:var(--muted)}
+.tags{display:flex;gap:6px;flex-wrap:wrap}
+.tag{font-size:.72rem;padding:3px 8px;border-radius:4px;background:var(--jade-soft);color:var(--jade);font-weight:600}
+.tag.seal{background:var(--seal-soft);color:var(--seal)}
+dl.fees{display:grid;grid-template-columns:1fr auto;gap:6px 12px;margin:0;font-size:.88rem;align-content:start}
+dl.fees dt{color:var(--muted)}
+dl.fees dd{margin:0;text-align:right}
+.locked{position:relative;border-top:1px dashed var(--line);padding-top:12px;font-size:.85rem;display:grid;gap:4px}
+.locked .lk-label{color:var(--muted);font-size:.78rem}
+.locked .lk-body{filter:blur(5px);user-select:none}
+.locked .lk-cta{position:absolute;inset:12px 0 0;display:flex;align-items:center;justify-content:center}
+.locked .lk-cta button{background:var(--seal);color:#fff;border:0;border-radius:999px;padding:6px 14px;font-size:.8rem;font-weight:600;cursor:pointer}
+body.pro .locked .lk-body{filter:none;user-select:auto}
+body.pro .locked .lk-cta{display:none}
+.empty{padding:40px;text-align:center;color:var(--muted);border:1px dashed var(--line);border-radius:var(--r)}
+
+/* grants */
+.table-wrap{overflow-x:auto;border:1px solid var(--line);border-radius:var(--r);background:var(--surface)}
+table{border-collapse:collapse;width:100%;min-width:760px;font-size:.92rem}
+th,td{text-align:left;padding:14px 16px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-family:var(--f-mono);font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);font-weight:400}
+tr:last-child td{border-bottom:0}
+td b{display:block}
+td small{color:var(--muted)}
+.cov{display:flex;gap:4px;flex-wrap:wrap}
+
+/* provinces */
+.prov-layout{display:grid;grid-template-columns:1fr 1fr;gap:32px;align-items:start}
+.bars{display:grid;gap:4px}
+.bar{display:grid;grid-template-columns:120px 1fr 112px;gap:12px;align-items:center;padding:8px 10px;border-radius:8px;cursor:pointer;border:1px solid transparent;background:none;text-align:left;width:100%}
+.bar:hover,.bar[aria-pressed="true"]{background:var(--surface);border-color:var(--line)}
+.bar .track{height:10px;background:var(--jade-soft);border-radius:5px;position:relative;overflow:hidden}
+.bar .fill{position:absolute;top:0;bottom:0;background:var(--jade);border-radius:5px}
+.bar .val{font-family:var(--f-mono);font-size:.8rem;text-align:right;font-variant-numeric:tabular-nums}
+.scale{display:grid;grid-template-columns:120px 1fr 112px;gap:12px;padding:0 10px;font-family:var(--f-mono);font-size:.7rem;color:var(--muted)}
+.scale div{display:flex;justify-content:space-between}
+.prov-card{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:24px;display:grid;gap:14px;position:sticky;top:90px}
+.prov-card .zh{font-family:var(--f-han);font-size:2.2rem;font-weight:900;color:var(--seal);line-height:1}
+.prov-card ul{margin:0;padding-left:18px;display:grid;gap:4px}
+
+/* docs */
+.docs-layout{display:grid;grid-template-columns:1.1fr .9fr;gap:40px;align-items:start}
+.level-tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px}
+.progress{height:8px;background:var(--line);border-radius:4px;overflow:hidden;margin-bottom:8px}
+.progress div{height:100%;background:var(--jade);transition:width .3s}
+.checklist{list-style:none;margin:0;padding:0;display:grid;gap:8px}
+.checklist li label{display:grid;grid-template-columns:22px 1fr;gap:12px;padding:12px 14px;background:var(--surface);border:1px solid var(--line);border-radius:8px;cursor:pointer}
+.checklist input{width:18px;height:18px;accent-color:var(--jade);margin-top:2px}
+.checklist small{display:block;color:var(--muted);font-size:.82rem}
+.checklist input:checked + span b{text-decoration:line-through;color:var(--muted)}
+ol.steps{list-style:none;margin:0;padding:0;display:grid;gap:0;counter-reset:s}
+ol.steps li{display:grid;grid-template-columns:44px 1fr;gap:14px;padding-bottom:22px;position:relative}
+ol.steps li::before{counter-increment:s;content:counter(s,decimal-leading-zero);font-family:var(--f-mono);font-size:.8rem;width:36px;height:36px;border-radius:50%;border:1.5px solid var(--jade);color:var(--jade);display:grid;place-items:center;background:var(--paper);position:relative;z-index:1}
+ol.steps li:not(:last-child)::after{content:"";position:absolute;left:17px;top:36px;bottom:0;width:1.5px;background:var(--line)}
+ol.steps .when{font-family:var(--f-mono);font-size:.75rem;color:var(--seal)}
+ol.steps p{font-size:.9rem;color:var(--muted)}
+
+/* pricing */
+.plans{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.plan{border:1px solid var(--line);border-radius:var(--r);padding:26px;display:grid;gap:16px;grid-template-rows:auto auto 1fr auto;background:var(--surface)}
+.plan.feat{border:2px solid var(--seal)}
+.plan .price{font-family:var(--f-display);font-size:2rem}
+.plan .price small{font-family:var(--f-body);font-size:.9rem;color:var(--muted);font-weight:400}
+.plan ul{margin:0;padding:0;list-style:none;display:grid;gap:8px;font-size:.92rem;align-content:start}
+.plan li{display:grid;grid-template-columns:18px 1fr;gap:8px}
+.plan li::before{content:"";width:8px;height:8px;margin-top:8px;border-radius:2px;background:var(--jade)}
+.plan.feat li::before{background:var(--seal)}
+
+/* lead form */
+.lead{display:grid;grid-template-columns:.9fr 1.1fr;gap:40px;align-items:start}
+.lead form{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:24px;display:grid;gap:14px}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.ok{background:var(--jade-soft);color:var(--ink);padding:12px 14px;border-radius:8px;font-size:.9rem}
+.err{color:var(--seal);font-size:.85rem}
+
+footer{border-top:1px solid var(--line);padding-block:28px;color:var(--muted);font-size:.85rem}
+footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px}
+
+/* modal */
+.modal{position:fixed;inset:0;background:rgba(5,15,12,.55);display:grid;place-items:center;z-index:50;padding:16px}
+.modal-box{background:var(--surface);border-radius:var(--r);padding:28px;max-width:440px;width:100%;display:grid;gap:14px}
+
+@media (max-width:900px){
+  .hero .wrap,.prov-layout,.docs-layout,.lead{grid-template-columns:1fr}
+  .plans{grid-template-columns:1fr}
+  .prov-card{position:static}
+  nav.links{display:none}
+}
+@media (max-width:480px){
+  .bar,.scale{grid-template-columns:86px 1fr 92px;gap:8px}
+  .form-row{grid-template-columns:1fr}
+  .grid{grid-template-columns:1fr}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+
+<div class="demo-note"><div class="wrap"><span>Прототип сайта. Цифры ориентировочные, перед запуском их нужно сверить с вузами.</span><span class="mono">Набор 2027/28</span></div></div>
+
+<header class="top"><div class="wrap">
+  <a class="brand" href="#top"><span class="seal-mini">华</span>Шаг в Китай</a>
+  <nav class="links">
+    <a href="#catalog">Вузы</a><a href="#grants">Гранты</a><a href="#provinces">Провинции</a><a href="#docs">Документы</a><a href="#plans">Тарифы</a>
+  </nav>
+  <label class="pro-switch" for="proToggle"><input type="checkbox" id="proToggle"> Режим Pro</label>
+</div></header>
+
+<section class="hero" id="top"><div class="wrap">
+  <div class="hero-copy">
+    <div class="stamp" aria-hidden="true"><span>留</span><span>学</span><span>中</span><span>国</span></div>
+    <h1>Учёба в Китае: <em>вуз, грант и документы</em> в одном месте</h1>
+    <p class="hero-lede">Сравните университеты по провинциям и стоимости, узнайте, на какие стипендии вы проходите, и соберите пакет документов по чек-листу. Если не хотите разбираться сами, мы проведём вас от выбора вуза до визы X1.</p>
+    <div class="facts">
+      <div><b>14</b><span>вузов в базе</span></div>
+      <div><b>5</b><span>типов грантов</span></div>
+      <div><b>11</b><span>провинций</span></div>
+      <div><b>¥2 500–3 500</b><span>стипендия CSC в месяц</span></div>
+    </div>
+  </div>
+  <form class="finder" id="finder">
+    <h3>Подберите вуз за минуту</h3>
+    <div class="field"><label for="fLevel">Что хотите изучать</label>
+      <select id="fLevel"><option value="all">Любая программа</option><option value="lang">Языковые курсы</option><option value="bach">Бакалавриат</option><option value="mast">Магистратура</option><option value="phd">Аспирантура (PhD)</option></select></div>
+    <div class="field"><label for="fProv">Провинция</label><select id="fProv"></select></div>
+    <div class="field"><label for="fBudget">Бюджет на обучение в год</label>
+      <input type="range" id="fBudget" min="15000" max="45000" step="1000" value="45000">
+      <div class="range-row"><span class="mono" id="fBudgetVal">до ¥45 000</span><span class="mono" id="fBudgetUsd">≈ $6 300</span></div></div>
+    <div class="field"><label for="fGrant">Грант</label>
+      <select id="fGrant"><option value="any">Не важно</option><option value="CSC">Правительство КНР (CSC)</option><option value="PROV">Провинциальный</option><option value="CIS">Институт Конфуция</option><option value="UNI">Стипендия вуза</option></select></div>
+    <button class="btn btn-primary" type="submit">Показать вузы</button>
+  </form>
+</div></section>
+
+<section class="block" id="catalog"><div class="wrap">
+  <div class="block-head">
+    <div><div class="eyebrow">Каталог</div><h2>Университеты</h2></div>
+    <p>Стоимость указана в юанях за учебный год. Сроки подачи, требования к баллам и шансы на грант открыты в тарифе Pro.</p>
+  </div>
+  <div class="cat-tools">
+    <div class="field"><label for="q">Поиск</label><input type="search" id="q" placeholder="Название, город или иероглифы"></div>
+    <div class="chips" id="sortChips" role="group" aria-label="Сортировка">
+      <button class="chip" type="button" data-sort="name" aria-pressed="true">По алфавиту</button>
+      <button class="chip" type="button" data-sort="price" aria-pressed="false">Дешевле</button>
+      <button class="chip" type="button" data-sort="en" aria-pressed="false">Есть на английском</button>
+    </div>
+  </div>
+  <div class="count" id="count"></div>
+  <div class="grid" id="uniGrid"></div>
+</div></section>
+
+<section class="block" id="grants"><div class="wrap">
+  <div class="block-head">
+    <div><div class="eyebrow">Финансирование</div><h2>Гранты и стипендии</h2></div>
+    <p>Полный грант покрывает обучение, общежитие и страховку и платит ежемесячную стипендию. Частичные гранты чаще всего снимают только плату за обучение.</p>
+  </div>
+  <div class="table-wrap"><table>
+    <thead><tr><th>Программа</th><th>Что покрывает</th><th>Стипендия, ¥/мес</th><th>Как подать</th><th>Обычные сроки</th></tr></thead>
+    <tbody id="grantRows"></tbody>
+  </table></div>
+</div></section>
+
+<section class="block" id="provinces"><div class="wrap">
+  <div class="block-head">
+    <div><div class="eyebrow">География</div><h2>Где жить и сколько это стоит</h2></div>
+    <p>Расходы на жизнь в месяц без учёта обучения: еда, транспорт, связь, общежитие. Нажмите на провинцию, чтобы увидеть подробности.</p>
+  </div>
+  <div class="prov-layout">
+    <div>
+      <div class="bars" id="bars"></div>
+      <div class="scale" aria-hidden="true"><span></span><div><span>¥0</span><span>¥3 500</span><span>¥7 000</span></div><span></span></div>
+    </div>
+    <aside class="prov-card" id="provCard" aria-live="polite"></aside>
+  </div>
+</div></section>
+
+<section class="block" id="docs"><div class="wrap">
+  <div class="block-head">
+    <div><div class="eyebrow">Документы</div><h2>Чек-лист и порядок поступления</h2></div>
+    <p>Отмечайте, что уже готово. Отметки сохраняются в этом браузере.</p>
+  </div>
+  <div class="docs-layout">
+    <div>
+      <div class="level-tabs chips" id="docTabs" role="group" aria-label="Уровень обучения">
+        <button class="chip" type="button" data-doc="bach" aria-pressed="true">Бакалавриат</button>
+        <button class="chip" type="button" data-doc="mast" aria-pressed="false">Магистратура / PhD</button>
+        <button class="chip" type="button" data-doc="lang" aria-pressed="false">Языковые курсы</button>
+      </div>
+      <div class="progress"><div id="progBar" style="width:0%"></div></div>
+      <div class="count" id="progText"></div>
+      <ul class="checklist" id="checklist"></ul>
+    </div>
+    <div>
+      <h3 style="margin-bottom:18px">Путь от заявки до кампуса</h3>
+      <ol class="steps">
+        <li><div><span class="when">Сентябрь – ноябрь</span><b>Выбор вуза и программы</b><p>Определяемся с городом, языком обучения и бюджетом. Сдаём HSK или IELTS, если сертификата ещё нет.</p></div></li>
+        <li><div><span class="when">Ноябрь – январь</span><b>Сбор и перевод документов</b><p>Нотариальные копии и переводы, медицинская форма, справка о несудимости, мотивационное письмо.</p></div></li>
+        <li><div><span class="when">Декабрь – апрель</span><b>Подача в вуз и на грант</b><p>Онлайн-заявка на портале вуза и на campuschina.org для CSC. Для типа A подача идёт через посольство КНР.</p></div></li>
+        <li><div><span class="when">Май – июль</span><b>Результаты и Admission Notice</b><p>Вуз присылает письмо о зачислении и форму JW201 (грантникам) или JW202 (платникам).</p></div></li>
+        <li><div><span class="when">Июль – август</span><b>Студенческая виза X1</b><p>Подаём в визовый центр Китая с Admission Notice и JW-формой. X1 выдаётся на обучение дольше 180 дней.</p></div></li>
+        <li><div><span class="when">Сентябрь</span><b>Приезд и вид на жительство</b><p>Медосмотр в Китае и residence permit в течение 30 дней после въезда.</p></div></li>
+      </ol>
+    </div>
+  </div>
+</div></section>
+
+<section class="block" id="plans"><div class="wrap">
+  <div class="block-head">
+    <div><div class="eyebrow">Тарифы</div><h2>Сколько стоит доступ</h2></div>
+    <p>Каталог и базовая информация бесплатны. Платный доступ открывает данные, которые экономят месяцы переписки с вузами.</p>
+  </div>
+  <div class="plans">
+    <div class="plan">
+      <div><div class="eyebrow">Старт</div><h3 style="margin-top:6px">Бесплатно</h3></div>
+      <div class="price">$0</div>
+      <ul><li>Каталог вузов и стоимость обучения</li><li>Обзор грантов и провинций</li><li>Общий чек-лист документов</li></ul>
+      <button class="btn btn-ghost" type="button" data-goto="catalog">Смотреть каталог</button>
+    </div>
+    <div class="plan feat">
+      <div><div class="eyebrow" style="color:var(--seal)">Чаще всего выбирают</div><h3 style="margin-top:6px">Pro</h3></div>
+      <div class="price">$19 <small>в месяц</small></div>
+      <ul><li>Сроки подачи по каждому вузу</li><li>Требования к HSK, IELTS и среднему баллу</li><li>Оценка шансов на грант</li><li>Шаблоны мотивационного письма и study plan</li><li>Напоминания о дедлайнах</li></ul>
+      <button class="btn btn-seal" type="button" data-buy="pro">Открыть Pro</button>
+    </div>
+    <div class="plan">
+      <div><div class="eyebrow">С сопровождением</div><h3 style="margin-top:6px">Под ключ</h3></div>
+      <div class="price">от $590 <small>разово</small></div>
+      <ul><li>Личный консультант</li><li>Подбор 5 вузов под ваш профиль</li><li>Проверка и перевод документов</li><li>Подача в вузы и на CSC</li><li>Помощь с визой X1 и заселением</li></ul>
+      <button class="btn btn-primary" type="button" data-goto="lead">Оставить заявку</button>
+    </div>
+  </div>
+</div></section>
+
+<section class="block" id="lead"><div class="wrap lead">
+  <div style="display:grid;gap:14px">
+    <div class="eyebrow">Консультация</div>
+    <h2>Расскажите о себе, и мы подберём вуз</h2>
+    <p style="color:var(--muted)">Консультант посмотрит ваши оценки и языковой уровень, предложит вузы и гранты, на которые вы реально проходите, и пришлёт план подачи.</p>
+  </div>
+  <form id="leadForm" novalidate>
+    <div class="form-row">
+      <div class="field"><label for="lName">Имя</label><input type="text" id="lName" autocomplete="name"></div>
+      <div class="field"><label for="lContact">Телефон или Telegram</label><input type="text" id="lContact"></div>
+    </div>
+    <div class="form-row">
+      <div class="field"><label for="lLevel">Программа</label><select id="lLevel"><option>Бакалавриат</option><option>Магистратура</option><option>PhD</option><option>Языковые курсы</option></select></div>
+      <div class="field"><label for="lLang">Уровень языка</label><select id="lLang"><option>Нет сертификата</option><option>HSK 3</option><option>HSK 4</option><option>HSK 5+</option><option>IELTS 6.0+</option></select></div>
+    </div>
+    <div class="field"><label for="lMsg">Комментарий</label><textarea id="lMsg" rows="3" placeholder="Например: хочу в Шанхай на экономику, средний балл 4.6"></textarea></div>
+    <div class="err" id="lErr" hidden></div>
+    <div class="ok" id="lOk" hidden></div>
+    <button class="btn btn-seal" type="submit">Отправить заявку</button>
+  </form>
+</div></section>
+
+<footer><div class="wrap"><span>Шаг в Китай · помощь с поступлением в китайские вузы</span><span class="mono">Данные: сайты вузов и campuschina.org, проверка нужна перед запуском</span></div></footer>
+
+<div class="modal" id="modal" hidden>
+  <div class="modal-box" role="dialog" aria-modal="true" aria-labelledby="mTitle">
+    <h3 id="mTitle">Тариф Pro</h3>
+    <p style="color:var(--muted)">Оплата пока не подключена. В прототипе можно включить режим Pro, чтобы посмотреть, что видит подписчик.</p>
+    <div style="display:flex;gap:10px;flex-wrap:wrap">
+      <button class="btn btn-seal" type="button" id="mEnable">Включить демо Pro</button>
+      <button class="btn btn-ghost" type="button" id="mClose">Закрыть</button>
+    </div>
+  </div>
+</div>
+
+<script>
+const RATE = 7.1;
+const LEVEL = {lang:"Язык", bach:"Бакалавриат", mast:"Магистратура", phd:"PhD"};
+const GRANT = {CSC:"CSC", PROV:"Провинция", CIS:"Конфуций", UNI:"Грант вуза"};
+
+const PROVS = [
+  {id:"bj", ru:"Пекин", zh:"北京", cost:[4000,6500], climate:"Холодная сухая зима, жаркое лето", pros:["Больше всего топовых вузов","Сильная языковая среда","Высокая цена аренды за пределами кампуса"], grant:"Beijing Government Scholarship"},
+  {id:"sh", ru:"Шанхай", zh:"上海", cost:[4500,7000], climate:"Мягкая влажная зима, жаркое влажное лето", pros:["Деловой центр, стажировки","Много программ на английском","Самый дорогой город в списке"], grant:"Shanghai Government Scholarship"},
+  {id:"gd", ru:"Гуандун", zh:"广东", cost:[3500,5500], climate:"Субтропики, тепло круглый год", pros:["Рядом Шэньчжэнь и Гонконг","Технологии и бизнес","В быту часто говорят на кантонском"], grant:"Guangdong Provincial Scholarship"},
+  {id:"zj", ru:"Чжэцзян", zh:"浙江", cost:[3000,4800], climate:"Мягкая зима, дождливое лето", pros:["Ханчжоу: e-commerce и IT","Высокий уровень жизни","Красивая природа"], grant:"Zhejiang Government Scholarship"},
+  {id:"js", ru:"Цзянсу", zh:"江苏", cost:[3000,4500], climate:"Прохладная зима, жаркое лето", pros:["Много сильных вузов","Нанкин дешевле Шанхая","Провинциальный грант Jasmine"], grant:"Jasmine Jiangsu Government Scholarship"},
+  {id:"hb", ru:"Хубэй", zh:"湖北", cost:[2500,3600], climate:"Холодная зима без отопления, очень жаркое лето", pros:["Ухань: крупный студенческий город","Невысокие цены"], grant:"Hubei Provincial Scholarship"},
+  {id:"sc", ru:"Сычуань", zh:"四川", cost:[2500,3600], climate:"Мягкая пасмурная зима", pros:["Чэнду: спокойный ритм","Недорогая еда","Острая кухня"], grant:"Sichuan Provincial Scholarship"},
+  {id:"hl", ru:"Хэйлунцзян", zh:"黑龙江", cost:[2000,3000], climate:"Морозная зима до −25°C", pros:["Харбин: много русскоговорящих","Самая доступная жизнь","Сильные технические вузы"], grant:"Heilongjiang Provincial Scholarship"},
+  {id:"ln", ru:"Ляонин", zh:"辽宁", cost:[2200,3300], climate:"Холодная зима, мягкое лето у моря", pros:["Далянь: приморский город","Инженерные программы"], grant:"Liaoning Government Scholarship"},
+  {id:"fj", ru:"Фуцзянь", zh:"福建", cost:[2800,4200], climate:"Тёплая зима, тайфуны летом", pros:["Сямэнь: один из самых красивых кампусов","Чистый приморский город"], grant:"Fujian Government Scholarship"},
+  {id:"xj", ru:"Синьцзян", zh:"新疆", cost:[2000,3000], climate:"Резко континентальный", pros:["Близко к Центральной Азии","Низкие цены","Много студентов из Казахстана"], grant:"Квоты CSC для стран региона"}
+];
+const P = Object.fromEntries(PROVS.map(p=>[p.id,p]));
+
+const UNIS = [
+  {ru:"Пекинский университет", zh:"北京大学", city:"Пекин", prov:"bj", lv:["lang","bach","mast","phd"], fee:{lang:26000,bach:26000,mast:33000}, en:true, gr:["CSC","PROV","UNI"], dl:"Бакалавриат: до середины февраля. CSC тип B: январь", req:"HSK 5 (бакалавриат), сильный аттестат, вступительный экзамен вуза", chance:"Низкий, конкурс высокий"},
+  {ru:"Университет Цинхуа", zh:"清华大学", city:"Пекин", prov:"bj", lv:["lang","bach","mast","phd"], fee:{lang:28000,bach:30000,mast:40000}, en:true, gr:["CSC","UNI"], dl:"Бакалавриат: январь – март. Магистратура: декабрь – январь", req:"HSK 5, математика и физика на высоком уровне", chance:"Низкий"},
+  {ru:"Пекинский университет языка и культуры", zh:"北京语言大学", city:"Пекин", prov:"bj", lv:["lang","bach","mast"], fee:{lang:23200,bach:23000,mast:27000}, en:false, gr:["CSC","CIS","UNI"], dl:"Языковые курсы: набор весной и осенью, до июня и до декабря", req:"Без HSK на языковые курсы. Бакалавриат: HSK 4", chance:"Высокий для гранта Конфуция"},
+  {ru:"Фуданьский университет", zh:"复旦大学", city:"Шанхай", prov:"sh", lv:["lang","bach","mast","phd"], fee:{lang:23000,bach:25000,mast:33000}, en:true, gr:["CSC","PROV","UNI"], dl:"Бакалавриат: до конца февраля. Shanghai Gov: март", req:"HSK 5 или IELTS 6.5 для англоязычных программ", chance:"Средний"},
+  {ru:"Шанхайский университет Цзяотун", zh:"上海交通大学", city:"Шанхай", prov:"sh", lv:["lang","bach","mast","phd"], fee:{lang:24000,bach:24800,mast:34800}, en:true, gr:["CSC","PROV","UNI"], dl:"Бакалавриат: декабрь – март", req:"HSK 5, тест вуза по математике", chance:"Средний"},
+  {ru:"Чжэцзянский университет", zh:"浙江大学", city:"Ханчжоу", prov:"zj", lv:["lang","bach","mast","phd"], fee:{lang:21000,bach:24800,mast:28000}, en:true, gr:["CSC","PROV","UNI"], dl:"Бакалавриат: до апреля. CSC тип B: до середины марта", req:"HSK 4–5, IELTS 6.0 для англоязычных", chance:"Средний"},
+  {ru:"Нанкинский университет", zh:"南京大学", city:"Нанкин", prov:"js", lv:["lang","bach","mast","phd"], fee:{lang:20000,bach:23000,mast:26000}, en:false, gr:["CSC","PROV","UNI"], dl:"Бакалавриат: до апреля. Jasmine Jiangsu: март", req:"HSK 4 на бакалавриат, HSK 5 на магистратуру", chance:"Выше среднего"},
+  {ru:"Уханьский университет", zh:"武汉大学", city:"Ухань", prov:"hb", lv:["lang","bach","mast","phd"], fee:{lang:18000,bach:20000,mast:24000}, en:true, gr:["CSC","PROV","UNI"], dl:"Бакалавриат: до мая. CSC: до марта", req:"HSK 4, медицина на английском: IELTS 6.0", chance:"Выше среднего"},
+  {ru:"Университет Сунь Ятсена", zh:"中山大学", city:"Гуанчжоу", prov:"gd", lv:["lang","bach","mast","phd"], fee:{lang:20000,bach:26000,mast:30000}, en:true, gr:["CSC","PROV","UNI"], dl:"Бакалавриат: декабрь – апрель", req:"HSK 4–5, собеседование", chance:"Средний"},
+  {ru:"Сычуаньский университет", zh:"四川大学", city:"Чэнду", prov:"sc", lv:["lang","bach","mast","phd"], fee:{lang:16000,bach:20000,mast:24000}, en:true, gr:["CSC","PROV","UNI"], dl:"Бакалавриат: до мая", req:"HSK 4 на бакалавриат", chance:"Высокий"},
+  {ru:"Харбинский политехнический университет", zh:"哈尔滨工业大学", city:"Харбин", prov:"hl", lv:["lang","bach","mast","phd"], fee:{lang:16000,bach:20000,mast:24000}, en:true, gr:["CSC","PROV","UNI"], dl:"Бакалавриат: до мая. CSC: до апреля", req:"HSK 4, сильная математика. Есть подготовительный год", chance:"Высокий для технических специальностей"},
+  {ru:"Даляньский политехнический университет", zh:"大连理工大学", city:"Далянь", prov:"ln", lv:["lang","bach","mast","phd"], fee:{lang:15000,bach:19800,mast:23800}, en:true, gr:["CSC","PROV","UNI"], dl:"Бакалавриат: до июня", req:"HSK 4 или IELTS 6.0", chance:"Высокий"},
+  {ru:"Сямэньский университет", zh:"厦门大学", city:"Сямэнь", prov:"fj", lv:["lang","bach","mast","phd"], fee:{lang:18000,bach:22000,mast:28000}, en:true, gr:["CSC","PROV","CIS","UNI"], dl:"Бакалавриат: до апреля", req:"HSK 4–5", chance:"Средний"},
+  {ru:"Синьцзянский университет", zh:"新疆大学", city:"Урумчи", prov:"xj", lv:["lang","bach","mast"], fee:{lang:14000,bach:16000,mast:20000}, en:false, gr:["CSC","CIS","UNI"], dl:"Языковые курсы: до июня. Бакалавриат: до мая", req:"Языковые курсы без требований. Бакалавриат: HSK 4", chance:"Высокий для Центральной Азии"}
+];
+
+const GRANTS = [
+  {name:"Стипендия правительства КНР, тип A", zh:"中国政府奖学金", cov:["Обучение","Общежитие","Страховка","Стипендия"], st:"2 500 / 3 000 / 3 500", stn:"бакалавр / магистр / PhD", how:"Через посольство КНР или министерство образования вашей страны", when:"Январь – март"},
+  {name:"Стипендия правительства КНР, тип B", zh:"中国政府奖学金", cov:["Обучение","Общежитие","Страховка","Стипендия"], st:"2 500 / 3 000 / 3 500", stn:"бакалавр / магистр / PhD", how:"Напрямую в вуз, который входит в программу CSC, плюс campuschina.org", when:"Декабрь – апрель"},
+  {name:"Стипендия Института Конфуция", zh:"国际中文教师奖学金", cov:["Обучение","Общежитие","Страховка","Стипендия"], st:"2 500 – 3 000", stn:"зависит от срока программы", how:"Через Институт Конфуция в вашем городе, нужен HSK и HSKK", when:"Март – май"},
+  {name:"Провинциальные и городские гранты", zh:"地方政府奖学金", cov:["Обучение","Иногда стипендия"], st:"0 – 2 000", stn:"зависит от провинции", how:"Через вуз выбранной провинции, например Shanghai Gov или Jasmine Jiangsu", when:"Февраль – май"},
+  {name:"Стипендии университетов", zh:"校长奖学金", cov:["Полное или частичное обучение"], st:"0 – 3 000", stn:"от скидки 25% до полного гранта", how:"Отмечается в заявке на поступление, иногда нужно отдельное эссе", when:"Вместе с подачей в вуз"}
+];
+
+const DOCS = {
+  common:[
+    ["Загранпаспорт","Действует минимум 6 месяцев после начала учёбы, лучше дольше"],
+    ["Фото 3×4 на белом фоне","Электронная версия для онлайн-заявки"],
+    ["Форма медосмотра для иностранцев","Foreigner Physical Examination Form, с подписью врача и печатью"],
+    ["Справка о несудимости","С нотариальным переводом на английский или китайский"]
+  ],
+  bach:[
+    ["Аттестат с приложением","Нотариальная копия и перевод на английский или китайский"],
+    ["Сертификат HSK 4 или IELTS 6.0","HSK 4 для программ на китайском, IELTS или TOEFL для английских"],
+    ["Мотивационное письмо","Почему Китай, почему этот вуз и эта специальность"],
+    ["Гарантийное письмо опекуна","Нужно, если на момент подачи вам меньше 18 лет"]
+  ],
+  mast:[
+    ["Диплом и транскрипт","Нотариальные копии с переводом, для выпускников этого года справка из вуза"],
+    ["Сертификат HSK 5 или IELTS 6.5","Требования у вузов разные, смотрите карточку вуза"],
+    ["Study plan или research proposal","Не меньше 800 слов для магистратуры, 1 500 для PhD"],
+    ["Два рекомендательных письма","От профессоров или доцентов, с подписью и контактами"]
+  ],
+  lang:[
+    ["Аттестат или диплом","Нотариальная копия, перевод нужен не всем вузам"],
+    ["Подтверждение оплаты или гранта","Для платного обучения иногда просят выписку со счёта"]
+  ]
+};
+
+/* state */
+const S = {level:"all", prov:"all", budget:45000, grant:"any", q:"", sort:"name", doc:"bach", provSel:"hl"};
+const $ = s=>document.querySelector(s);
+const fmt = n=>n.toLocaleString("ru-RU").replace(/,/g," ");
+const esc = s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const store = {get(k,d){try{const v=localStorage.getItem(k);return v===null?d:JSON.parse(v)}catch(e){return d}}, set(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}};
+
+/* pro mode */
+function setPro(on){document.body.classList.toggle("pro",on);$("#proToggle").checked=on;store.set("cs_pro",on)}
+$("#proToggle").addEventListener("change",e=>setPro(e.target.checked));
+function openModal(){$("#modal").hidden=false;$("#mEnable").focus()}
+$("#mClose").addEventListener("click",()=>$("#modal").hidden=true);
+$("#mEnable").addEventListener("click",()=>{setPro(true);$("#modal").hidden=true});
+$("#modal").addEventListener("click",e=>{if(e.target.id==="modal")$("#modal").hidden=true});
+document.addEventListener("keydown",e=>{if(e.key==="Escape")$("#modal").hidden=true});
+
+/* finder */
+const fProv=$("#fProv");
+fProv.innerHTML='<option value="all">Любая провинция</option>'+PROVS.map(p=>`<option value="${p.id}">${p.ru}</option>`).join("");
+function syncBudget(){const v=+$("#fBudget").value;$("#fBudgetVal").textContent=(v>=45000?"до ¥45 000+":"до ¥"+fmt(v));$("#fBudgetUsd").textContent="≈ $"+fmt(Math.round(v/RATE/100)*100)}
+$("#fBudget").addEventListener("input",syncBudget);
+$("#finder").addEventListener("submit",e=>{
+  e.preventDefault();
+  Object.assign(S,{level:$("#fLevel").value,prov:fProv.value,budget:+$("#fBudget").value,grant:$("#fGrant").value});
+  renderUnis();document.getElementById("catalog").scrollIntoView({behavior:"smooth"});
+});
+["#fLevel","#fGrant"].forEach(id=>$(id).addEventListener("change",()=>{S.level=$("#fLevel").value;S.grant=$("#fGrant").value;renderUnis()}));
+fProv.addEventListener("change",()=>{S.prov=fProv.value;renderUnis()});
+$("#fBudget").addEventListener("change",()=>{S.budget=+$("#fBudget").value;renderUnis()});
+
+/* catalog */
+function minFee(u){const lv=S.level==="all"?Object.keys(u.fee):[S.level==="phd"?"mast":S.level];return Math.min(...lv.map(k=>u.fee[k]||Infinity))}
+function renderUnis(){
+  const q=S.q.trim().toLowerCase();
+  let list=UNIS.filter(u=>{
+    if(S.level!=="all"&&!u.lv.includes(S.level))return false;
+    if(S.prov!=="all"&&u.prov!==S.prov)return false;
+    if(S.grant!=="any"&&!u.gr.includes(S.grant))return false;
+    if(S.budget<45000&&minFee(u)>S.budget)return false;
+    if(S.sort==="en"&&!u.en)return false;
+    if(q&&!(u.ru+" "+u.zh+" "+u.city+" "+P[u.prov].ru).toLowerCase().includes(q))return false;
+    return true;
+  });
+  list.sort(S.sort==="price"?(a,b)=>minFee(a)-minFee(b):(a,b)=>a.ru.localeCompare(b.ru,"ru"));
+  $("#count").textContent=`Найдено: ${list.length} из ${UNIS.length}`;
+  $("#uniGrid").innerHTML=list.length?list.map(u=>`
+    <article class="uni">
+      <div class="uni-top"><div><h3>${esc(u.ru)}</h3><div class="loc">${esc(u.city)}, ${P[u.prov].ru}</div></div><span class="zh">${u.zh}</span></div>
+      <div class="tags">${u.lv.map(l=>`<span class="tag">${LEVEL[l]}</span>`).join("")}${u.en?'<span class="tag">English</span>':""}${u.gr.map(g=>`<span class="tag seal">${GRANT[g]}</span>`).join("")}</div>
+      <dl class="fees">${Object.entries(u.fee).map(([k,v])=>`<dt>${LEVEL[k]}</dt><dd class="mono">¥${fmt(v)} <small style="color:var(--muted)">≈ $${fmt(Math.round(v/RATE/10)*10)}</small></dd>`).join("")}</dl>
+      <div class="locked">
+        <div class="lk-body"><span class="lk-label">Сроки подачи</span><div>${esc(u.dl)}</div><span class="lk-label">Требования</span><div>${esc(u.req)}</div><span class="lk-label">Шанс на грант</span><div>${esc(u.chance)}</div></div>
+        <div class="lk-cta"><button type="button" data-buy="pro">Открыть в Pro</button></div>
+      </div>
+    </article>`).join(""):`<div class="empty">Под эти условия вузов нет. Увеличьте бюджет или выберите другую провинцию.</div>`;
+}
+$("#q").addEventListener("input",e=>{S.q=e.target.value;renderUnis()});
+$("#sortChips").addEventListener("click",e=>{const b=e.target.closest("[data-sort]");if(!b)return;S.sort=b.dataset.sort;document.querySelectorAll("#sortChips .chip").forEach(c=>c.setAttribute("aria-pressed",c===b));renderUnis()});
+
+/* grants */
+$("#grantRows").innerHTML=GRANTS.map(g=>`<tr><td><b>${g.name}</b><small class="han">${g.zh}</small></td><td><div class="cov">${g.cov.map(c=>`<span class="tag">${c}</span>`).join("")}</div></td><td><b class="mono">${g.st}</b><small>${g.stn}</small></td><td>${g.how}</td><td class="mono">${g.when}</td></tr>`).join("");
+
+/* provinces */
+const MAXC=7000;
+function renderProv(){
+  $("#bars").innerHTML=[...PROVS].sort((a,b)=>b.cost[1]-a.cost[1]).map(p=>`<button class="bar" type="button" data-prov="${p.id}" aria-pressed="${p.id===S.provSel}"><span>${p.ru}</span><span class="track"><span class="fill" style="left:${p.cost[0]/MAXC*100}%;right:${100-p.cost[1]/MAXC*100}%"></span></span><span class="val">¥${fmt(p.cost[0])}–${fmt(p.cost[1])}</span></button>`).join("");
+  const p=P[S.provSel];const n=UNIS.filter(u=>u.prov===p.id);
+  $("#provCard").innerHTML=`<div style="display:flex;justify-content:space-between;align-items:start;gap:12px"><div><div class="eyebrow">Провинция</div><h3 style="font-size:1.4rem;margin-top:4px">${p.ru}</h3></div><span class="zh">${p.zh}</span></div>
+    <div><span class="eyebrow">Жизнь в месяц</span><div class="mono" style="font-size:1.2rem">¥${fmt(p.cost[0])} – ${fmt(p.cost[1])} <small style="color:var(--muted)">≈ $${fmt(Math.round(p.cost[0]/RATE/10)*10)}–${fmt(Math.round(p.cost[1]/RATE/10)*10)}</small></div></div>
+    <div><span class="eyebrow">Климат</span><div>${p.climate}</div></div>
+    <ul>${p.pros.map(x=>`<li>${x}</li>`).join("")}</ul>
+    <div><span class="eyebrow">Местный грант</span><div>${p.grant}</div></div>
+    <button class="btn btn-ghost" type="button" data-showprov="${p.id}">Вузы провинции: ${n.length}</button>`;
+}
+$("#bars").addEventListener("click",e=>{const b=e.target.closest("[data-prov]");if(!b)return;S.provSel=b.dataset.prov;renderProv()});
+$("#provCard").addEventListener("click",e=>{const b=e.target.closest("[data-showprov]");if(!b)return;S.prov=b.dataset.showprov;fProv.value=S.prov;renderUnis();document.getElementById("catalog").scrollIntoView({behavior:"smooth"})});
+
+/* docs checklist */
+let checked=store.get("cs_docs",{});
+function renderDocs(){
+  const items=[...DOCS.common,...DOCS[S.doc]];
+  $("#checklist").innerHTML=items.map(([t,d])=>{const k=S.doc+":"+t;return `<li><label><input type="checkbox" data-k="${esc(k)}" ${checked[k]?"checked":""}><span><b>${t}</b><small>${d}</small></span></label></li>`}).join("");
+  const done=items.filter(([t])=>checked[S.doc+":"+t]).length;
+  $("#progBar").style.width=(done/items.length*100)+"%";
+  $("#progText").textContent=`Готово ${done} из ${items.length}`;
+}
+$("#checklist").addEventListener("change",e=>{const k=e.target.dataset.k;if(!k)return;checked[k]=e.target.checked;store.set("cs_docs",checked);renderDocs()});
+$("#docTabs").addEventListener("click",e=>{const b=e.target.closest("[data-doc]");if(!b)return;S.doc=b.dataset.doc;document.querySelectorAll("#docTabs .chip").forEach(c=>c.setAttribute("aria-pressed",c===b));renderDocs()});
+
+/* buttons */
+document.addEventListener("click",e=>{
+  if(e.target.closest("[data-buy]"))openModal();
+  const g=e.target.closest("[data-goto]");if(g)document.getElementById(g.dataset.goto).scrollIntoView({behavior:"smooth"});
+});
+
+/* lead form */
+$("#leadForm").addEventListener("submit",e=>{
+  e.preventDefault();
+  const name=$("#lName").value.trim(),contact=$("#lContact").value.trim();
+  $("#lOk").hidden=true;
+  if(!name||!contact){$("#lErr").textContent="Укажите имя и телефон или Telegram, чтобы консультант мог с вами связаться.";$("#lErr").hidden=false;return}
+  $("#lErr").hidden=true;
+  $("#lOk").textContent=`${name}, заявка заполнена. В прототипе она никуда не отправляется: приём заявок подключим на следующем шаге.`;
+  $("#lOk").hidden=false;
+});
+
+setPro(store.get("cs_pro",false));
+syncBudget();renderUnis();renderProv();renderDocs();
+</script>
